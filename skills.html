@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Skills — Mauli Nagawade</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Page-specific styles for the skills showcase */
+    .skills-hero {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:1rem;
+      margin-bottom:1rem;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(96,165,250,0.04), rgba(124,58,237,0.02));
+      border:1px solid rgba(96,165,250,0.06);
+    }
+    .tabs {
+      display:flex;
+      gap:.5rem;
+      margin: .8rem 0 1rem;
+      flex-wrap:wrap;
+    }
+    .tab-btn {
+      padding:.45rem .85rem;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,0.06);
+      background:transparent;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .tab-btn.active {
+      background:var(--accent);
+      color:white;
+      box-shadow:var(--shadow);
+    }
+
+    .skills-layout {
+      display:grid;
+      grid-template-columns: 1fr 340px;
+      gap:1rem;
+      align-items:start;
+    }
+
+    /* Left column: skills list */
+    .skill-group { display:flex;flex-direction:column; gap:.9rem; margin-bottom:1rem; }
+    .skill-row { display:flex;flex-direction:column; gap:.4rem; }
+    .skill-head { display:flex; justify-content:space-between; align-items:center; gap:.6rem; font-weight:700; }
+    .skill-bar { height:12px; border-radius:999px; background: rgba(15,23,42,0.05); overflow:hidden; }
+    .skill-fill { height:100%; width:0%; background: linear-gradient(90deg,var(--accent),#7c3aed); transition: width 900ms cubic-bezier(.2,.9,.3,1); }
+
+    /* Right column: summary card */
+    .summary-card {
+      background:var(--card);
+      padding:1rem;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:.8rem;
+    }
+    .summary-card h3 { margin:0; }
+    .badge-list { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.35rem; }
+    .badge { padding:.3rem .55rem; border-radius:999px; background:rgba(15,23,42,0.04); font-weight:700; font-size:.85rem; color:var(--muted); }
+
+    .experience, .certs { margin-top:.6rem; }
+    .experience li, .certs li { margin-bottom:.45rem; color:var(--muted); font-size:.95rem; }
+
+    /* small project links */
+    .small-links { display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.4rem; }
+    .small-links a { text-decoration:none; color:var(--accent); font-weight:700; border:1px solid rgba(15,23,42,0.06); padding:.35rem .6rem; border-radius:8px; background:transparent; }
+
+    /* responsive */
+    @media (max-width:980px){
+      .skills-layout { grid-template-columns: 1fr; }
+      .summary-card { order: -1; }
+    }
+
+    /* accessible focus */
+    .tab-btn:focus, .small-links a:focus { outline: 3px solid rgba(96,165,250,0.14); outline-offset:2px; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand"><a href="index.html">Mauli B Nagawade</a></div>
+      <nav class="main-nav" aria-label="Primary">
+        <ul id="nav-list" class="nav-list">
+          <li><a class="nav-link" href="index.html">About</a></li>
+          <li><a class="nav-link active" href="skills.html">Skills</a></li>
+          <li><a class="nav-link" href="projects.html">Projects</a></li>
+          
+          <li><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <button id="theme-toggle" class="icon-btn" title="Toggle dark mode">🌙</button>
+        <div class="visitor">Visitors: <span id="visitor-count">0</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <section class="page-section" aria-labelledby="skills-title">
+      <div class="skills-hero" role="region" aria-label="Skills hero">
+        <div>
+          <h1 id="skills-title" style="margin:0">Skills & Expertise</h1>
+          <p class="muted" style="margin:.35rem 0 0">Focused tracks: Java Development, Data Science, Machine Learning — click a tab to view details.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:.6rem;align-items:flex-end">
+          <div class="tabs" role="tablist" aria-label="Skill tracks">
+            <button class="tab-btn active" data-track="java" role="tab" aria-selected="true">Java Development</button>
+            <button class="tab-btn" data-track="data" role="tab" aria-selected="false">Data Science</button>
+            <button class="tab-btn" data-track="ml" role="tab" aria-selected="false">Machine Learning</button>
+          </div>
+          <div style="display:flex;gap:.5rem;">
+            <a class="btn ghost" href="MauliResumeD.pdf">View Resume</a>
+            <a class="btn" href="projects.html">View Projects</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="skills-layout">
+        <!-- LEFT: Track detail area (swappable panels) -->
+        <div id="track-area">
+
+          <!-- JAVA TRACK -->
+          <div class="track-panel" id="track-java" data-track="java" aria-hidden="false">
+            <h2 style="margin-top:0">Java Development</h2>
+            <p class="muted">Backend & enterprise development using Java and Spring ecosystem. Strong in API design, databases and production-ready services.</p>
+
+            <div class="skill-group">
+              <div class="skill-row">
+                <div class="skill-head"><span>Java (Core & OOP)</span><span class="skill-percent">92%</span></div>
+                <div class="skill-bar" data-percent="92"><div class="skill-fill"></div></div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-head"><span>Spring Boot / Spring MVC</span><span class="skill-percent">60%</span></div>
+                <div class="skill-bar" data-percent="88"><div class="skill-fill"></div></div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-head"><span>REST API Design</span><span class="skill-percent">60%</span></div>
+                <div class="skill-bar" data-percent="85"><div class="skill-fill"></div></div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-head"><span>SQL</span><span class="skill-percent">80%</span></div>
+                <div class="skill-bar" data-percent="80"><div class="skill-fill"></div></div>
+              </div>
+
+              
+            </div>
+
+            <div class="muted">Key tools & frameworks</div>
+            <div class="badge-list" aria-hidden="false">
+              <span class="badge">Java 11/17</span>
+              <span class="badge">Spring Boot</span>
+              <span class="badge">Hibernate</span>
+              <span class="badge">Maven/Gradle</span>
+              <span class="badge">MySQL / PostgreSQL</span>
+              <span class="badge">Docker</span>
+            </div>
+
+            <div class="experience">
+              <h4 style="margin:.6rem 0 .25rem">Highlights</h4>
+              <ul>
+                <li>Built the small mininprojects using core java .</li>
+                
+              </ul>
+            </div>
+
+            <div class="small-links" style="margin-top:.6rem">
+              <a href="projects.html#portfolio" target="_blank">Portfolio Site</a>
+              <a href="projects.html#churn" target="_blank">Churn Project</a>
+            </div>
+          </div>
+
+          <!-- DATA SCIENCE TRACK -->
+          <div class="track-panel" id="track-data" data-track="data" aria-hidden="true" style="display:none;">
+            <h2 style="margin-top:0">Data Science</h2>
+            <p class="muted">Data cleaning, feature engineering, exploratory analysis and production-ready pipelines.</p>
+
+            <div class="skill-group">
+              <div class="skill-row">
+                <div class="skill-head"><span>Python (Pandas / NumPy)</span><span class="skill-percent">88%</span></div>
+                <div class="skill-bar" data-percent="88"><div class="skill-fill"></div></div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-head"><span>Data Visualization</span><span class="skill-percent">82%</span></div>
+                <div class="skill-bar" data-percent="82"><div class="skill-fill"></div></div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-head"><span>Feature Engineering</span><span class="skill-percent">84%</span></div>
+                <div class="skill-bar" data-percent="84"><div class="skill-fill"></div></div>
+              </div>
+
+               <div class="skill-row">
+                <div class="skill-head"><span>Supervised Machine Learning</span><span class="skill-percent">90%</span></div>
+                <div class="skill-bar" data-percent="84"><div class="skill-fill"></div></div>
+              </div>
+
+               <div class="skill-row">
+                <div class="skill-head"><span>Unsupervised Machine Learning</span><span class="skill-percent">94%</span></div>
+                <div class="skill-bar" data-percent="84"><div class="skill-fill"></div></div>
+              </div>
+
+               <div class="skill-row">
+                <div class="skill-head"><span>Deep Learning</span><span class="skill-percent">84%</span></div>
+                <div class="skill-bar" data-percent="84"><div class="skill-fill"></div></div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-head"><span>SQL & Data Modeling</span><span class="skill-percent">78%</span></div>
+                <div class="skill-bar" data-percent="78"><div class="skill-fill"></div></div>
+              </div>
+            </div>
+
+            <div class="muted">Key tools & libraries</div>
+            <div class="badge-list">
+              <span class="badge">Python</span>
+              <span class="badge">Pandas</span>
+              <span class="badge">NumPy</span>
+              <span class="badge">Matplotlib / Seaborn</span>
+              <span class="badge">scikit-learn</span>
+              <span class="badge">Jupyter</span>
+            </div>
+
+            <div class="experience">
+              <h4 style="margin:.6rem 0 .25rem">Highlights</h4>
+              <ul>
+                <li>Performed EDA and built predictive models for customer churn and classification tasks.</li>
+                <li>Produced data pipelines for preprocessing and model evaluation.</li>
+              </ul>
+            </div>
+
+            <div class="small-links">
+              <a href="projects.html#churn" target="_blank">Customer Churn</a>
+              <a href="projects.html#fakenews" target="_blank">Fake News Classifier</a>
+            </div>
+          </div>
+
+          <!-- MACHINE LEARNING TRACK -->
+          <div class="track-panel" id="track-ml" data-track="ml" aria-hidden="true" style="display:none;">
+            <h2 style="margin-top:0">Machine Learning</h2>
+            <p class="muted">End-to-end ML — model selection, training, evaluation and lightweight deployment.</p>
+
+            <div class="skill-group">
+              <div class="skill-row">
+                <div class="skill-head"><span>Supervised Learning</span><span class="skill-percent">84%</span></div>
+                <div class="skill-bar" data-percent="84"><div class="skill-fill"></div></div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-head"><span>Deep Learning (TensorFlow)</span><span class="skill-percent">72%</span></div>
+                <div class="skill-bar" data-percent="72"><div class="skill-fill"></div></div>
+              </div>
+
+              <div class="skill-row">
+                <div class="skill-head"><span>Model Evaluation & Tuning</span><span class="skill-percent">80%</span></div>
+                <div class="skill-bar" data-percent="80"><div class="skill-fill"></div></div>
+              </div>
+            </div>
+
+            <div class="muted">Key tools & frameworks</div>
+            <div class="badge-list">
+              <span class="badge">scikit-learn</span>
+              <span class="badge">TensorFlow / Keras</span>
+              <span class="badge">LSTM / RNN</span>
+              <span class="badge">Hyperparameter Tuning</span>
+            </div>
+
+            <div class="experience">
+              <h4 style="margin:.6rem 0 .25rem">Highlights</h4>
+              <ul>
+                <li>Built LSTM-based classifier for fake news detection using text preprocessing & embeddings.</li>
+                <li>Evaluated models with cross-validation, ROC/AUC, precision/recall analysis.</li>
+              </ul>
+            </div>
+
+            <div class="small-links">
+              <a href="projects.html#fakenews" target="_blank">Fake News Classifier</a>
+              <a href="projects.html#ml-demos" target="_blank">ML Demos</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: Summary / Certifications -->
+        <aside class="summary-card" aria-labelledby="summary-title">
+          <h3 id="summary-title">Summary</h3>
+          <p class="muted" style="margin:0">Strong blend of backend engineering and data/ML skills. Experienced with production APIs and data pipelines.</p>
+
+          <div style="margin-top:.6rem">
+            <strong>Top skills</strong>
+            <div class="badge-list">
+              <span class="badge">Java</span>
+              <span class="badge">Spring Boot</span>
+              <span class="badge">Python</span>
+              <span class="badge">scikit-learn</span>
+              <span class="badge">SQL</span>
+            </div>
+          </div>
+
+          <div class="experience">
+            <h4 style="margin:.6rem 0 .25rem">Experience</h4>
+            <ul>
+              <li>0.2 years building Java backends & APIs.</li>
+              <li>0.6 years delivering ML models & data analytics pipelines.</li>
+            </ul>
+          </div>
+
+          <div class="certs">
+            <h4 style="margin:.6rem 0 .25rem">Certifications</h4>
+            <ul>
+              <li>TNSIF Full Stack Java Developement</li>
+              <li>Certified Data Scientist</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:.6rem">
+            <strong>Quick links</strong>
+            <div class="small-links">
+              <a href="MauliResumeD.pdf">Resume (PDF)</a>
+              <a href="projects.html">My Projects</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Mauli Nagawade</p>
+    </div>
+  </footer>
+
+  <script>
+    // Tab switching behaviour (only on this page)
+    (function(){
+      const tabs = Array.from(document.querySelectorAll('.tab-btn'));
+      const panels = Array.from(document.querySelectorAll('.track-panel'));
+
+      function showTrack(track) {
+        panels.forEach(p => {
+          const is = p.dataset.track === track;
+          p.style.display = is ? '' : 'none';
+          p.setAttribute('aria-hidden', is ? 'false' : 'true');
+        });
+        tabs.forEach(t => {
+          const active = t.dataset.track === track;
+          t.classList.toggle('active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+
+        // animate skill bars on the currently visible panel
+        setTimeout(() => {
+          const bars = document.querySelectorAll('.track-panel[aria-hidden="false"] .skill-bar');
+          bars.forEach(b => {
+            const fill = b.querySelector('.skill-fill');
+            const pct = Number((b.dataset.percent || '0').replace('%','')) || 0;
+            if (fill) fill.style.width = pct + '%';
+          });
+        }, 80);
+      }
+
+      tabs.forEach(t => t.addEventListener('click', () => showTrack(t.dataset.track)));
+      // initial (java active by default)
+      showTrack('java');
+    })();
+  </script>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

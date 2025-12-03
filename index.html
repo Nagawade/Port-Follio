@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — Mauli Nagawade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand" role="banner">
+        <a href="index.html" id="brand-link">Mauli B Nagawade</a>
+      </div>
+
+      <nav class="main-nav" aria-label="Primary">
+        <ul id="nav-list" class="nav-list">
+          <li><a class="nav-link" href="index.html">About</a></li>
+          <li><a class="nav-link" href="skills.html">Skills</a></li>
+          <li><a class="nav-link" href="projects.html">Projects</a></li>
+          
+          <li><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <button id="theme-toggle" class="icon-btn" title="Toggle dark mode">🌙</button>
+        <div class="visitor">Visitors: <span id="visitor-count">0</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <section id="about" class="page-section" aria-labelledby="about-title">
+      <h1 id="about-title">About Me</h1>
+      <div class="about-grid">
+        <div class="about-card">
+          <p>Hello — I'm <strong>Mauli</strong>, a Full stack Java developer &amp; Aspiring Data Scientist. I build clean, responsive websites with HTML, CSS, JavaScript and backend in Java and Spring Boot. My goals are to create accessible interfaces, learn modern tooling, and build production-ready projects.</p>
+          <ul>
+            <li>Location: Pune, India</li>
+            <li>Education: Bachelor in Computer Engineering (S.P.P.U)</li>
+            <li>Interests: Web Dev, Backend Dev, Data Analytics, Machine Learning</li>
+          </ul>
+        </div>
+
+        <div class="profile-photo">
+          
+          <img alt="Mauli Nagawade — profile photo" src="Mauli.jpeg">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2025</span> Mauli B Nagawade — Built with HTML, CSS &amp; JavaScript</p>
+    </div>
+  </footer>
+
+  <!-- optionally load script.js here -->
+  <script src="script.js" defer></script>
+</body>
+</html>
